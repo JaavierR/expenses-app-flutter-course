@@ -46,6 +46,7 @@ class Chart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: groupedTransactionValues.map((data) {
             return Flexible(
+              // Expanded() it's a Flexible() with the fit configuration set to FlexFit.tight.
               fit: FlexFit.tight,
               child: ChartBar(
                   label: data['day'],
