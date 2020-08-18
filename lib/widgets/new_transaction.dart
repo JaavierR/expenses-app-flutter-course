@@ -16,16 +16,21 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime _selectedDate;
 
   void _submitData() {
-    final enteredTitle = _titleController.text;
-    final enteredAmount = double.parse(_amountController.text);
+    if (_amountController.text.isEmpty) {
+      return;
+    }
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    final _enteredTitle = _titleController.text;
+    final _enteredAmount = double.parse(_amountController.text);
+
+    if (_enteredTitle.isEmpty || _enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
     widget.addTx(
-      enteredTitle,
-      enteredAmount,
+      _enteredTitle,
+      _enteredAmount,
+      _selectedDate,
     );
 
     // This close the top most screen that is displayed. The modal sheet.

@@ -28,6 +28,8 @@ class ChartBar extends StatelessWidget {
           height: 80,
           width: 10,
           child: Stack(
+            // With the line below the bars fills from bottom to top.
+            alignment: Alignment.bottomCenter,
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
