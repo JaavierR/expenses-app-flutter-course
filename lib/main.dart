@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // Make a Builder, method that I add to my own widget, wich is only called internally (returns a Widget not void)
+  // Make a Builder method that I add to my own widget, wich is only called internally (returns a Widget not void)
   // I can call these methods  from inside my build method
   List<Widget> _buildLanscapeContent(
     MediaQueryData mediaQuery,
