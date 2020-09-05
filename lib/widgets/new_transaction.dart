@@ -27,20 +27,27 @@ class _NewTransactionState extends State<NewTransaction> {
     print("createState NewTransaction State");
   }
 
+  // initState(), didUpdateWidget, dispose() and setState() are methods
+
   @override
   void initState() {
+    // It's only create on the first build of the app, and then flutter uses
+    // the didUpdateWidget(). This is often used for fetching some initial data
+    // that I need in my app or in a widget of my app.
     super.initState();
     print("initState()");
   }
 
   @override
   void didUpdateWidget(NewTransaction oldWidget) {
+    // Is not used very often
     super.didUpdateWidget(oldWidget);
     print("didUpdateWidget()");
   }
 
   @override
   void dispose() {
+    // Great for cleaning up data (e.g. listeners or life connections)
     super.dispose();
     print("dispose()");
   }

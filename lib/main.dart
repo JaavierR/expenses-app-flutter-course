@@ -60,7 +60,13 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+// Mix-in allow us to add certain feature from another class
+// to our actual class. Adding certain properties, certain methods this
+// other class has without fully inheriting this other class. I use the mix-in
+// by adding a with keyword after my class
+
+// Mix-in allways has to be add in on a state object
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _userTransactions = [
     // Transaction(
     //   id: 't1',
@@ -77,6 +83,31 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   bool _showChart = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // This set up a listener, to trigger the method below
+    // Whenever the lifecycle state changes, go to certain observer and call
+    // the didChangeAppLifecycleState method, and the observed id this (this
+    // class itself)
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  // This method came from WidgetsBindingObserver
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  // Always I have to clear that listener to lifecycle changes when that widget,
+  // that state object is not require anymore
+  @override
+  dispose() {
+    super.dispose();
+    // This clear are listeners that I have to the app lifecycle
+    WidgetsBinding.instance.removeObserver(this);
+  }
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
