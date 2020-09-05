@@ -178,14 +178,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // MediaQuery me permite acceder a las propiedades del dispositivo para, personlizar distintos comportamientos de la app
-    final mediaQuery = MediaQuery.of(context);
-    final isLandscape = mediaQuery.orientation == Orientation.landscape;
-
-    // Dart is not able to find out the CupertinoNavigationBar and appBar have a prefered size property, but we can specify the type of data
-    final PreferredSizeWidget appBar = Platform.isIOS
+  Widget _buildAppBar() {
+    return Platform.isIOS
         ? CupertinoNavigationBar(
             middle: Text('Personal Expenses'),
             trailing: Row(
@@ -208,6 +202,16 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // MediaQuery me permite acceder a las propiedades del dispositivo para, personlizar distintos comportamientos de la app
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
+
+    // Dart is not able to find out the CupertinoNavigationBar and appBar have a prefered size property, but we can specify the type of data
+    final PreferredSizeWidget appBar = _buildAppBar();
 
     final txListWidget = Container(
       height: (mediaQuery.size.height -
