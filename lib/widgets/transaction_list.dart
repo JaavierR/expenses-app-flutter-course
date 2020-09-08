@@ -32,14 +32,33 @@ class TransacionList extends StatelessWidget {
               );
             },
           )
-        : ListView.builder(
-            itemBuilder: (context, index) {
-              return TransactionItem(
-                transaction: transactions[index],
-                deleteTx: deleteTx,
-              );
-            },
-            itemCount: transactions.length,
+        : ListView(
+            children: transactions
+                .map((tx) => TransactionItem(
+                      key: ValueKey(tx.id),
+                      transaction: tx,
+                      deleteTx: deleteTx,
+                    ))
+                .toList(),
           );
+    // : ListView.builder(
+    //     itemBuilder: (context, index) {
+    //       return TransactionItem(
+    //         // UniqueKey() built into Flutter and it automatically creates
+    //         // a unique key for every new item.
+    //         // But the UniqueKey() it's called whenever our ListView updates
+    //         // and that happens whenever set state is called and when
+    //         // our build methods reruns.
+    //         // With new key generated constantly, Flutter finds no widgets
+    //         // for the elements that now look for widget type + key. Hence
+    //         // new state objects are created all the time.
+    //         // ValueKey() instead I pass my own identifier
+    //         key: ValueKey(transactions[index].id),
+    //         transaction: transactions[index],
+    //         deleteTx: deleteTx,
+    //       );
+    //     },
+    //     itemCount: transactions.length,
+    //   );
   }
 }
